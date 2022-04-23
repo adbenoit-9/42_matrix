@@ -1,5 +1,5 @@
-#include "Vector.hpp"
-#include "Matrix.hpp"
+#include "../Vector.hpp"
+#include "../Matrix.hpp"
 
 template<class V, typename K>
 V   linear_combination(V *u, K *coefs, size_t size) {
