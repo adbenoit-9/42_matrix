@@ -1,2 +1,2 @@
-# 42_matrix
-42 - An introduction to Linear Algebra
+# MATRIX (@42Paris)
+*An introduction to Linear Algebra*
