@@ -22,6 +22,12 @@ class Matrix
         Matrix() : _row(0), _column(0) {
             this->_begin = new vector[0];
         }
+
+        Matrix(size_type m, size_type n, const value_type &val) :  _column(n), _row(m){
+            this->_begin = new vector[this->_row];
+            for (size_type i = 0; i < this->_row; i++)
+                this->_begin[i] = vector(this->_column, 0);
+        }
         
         Matrix(const Matrix& x) : _column(x._column), _row(x._row)  {
             this->_begin = new vector[x._row];
@@ -29,7 +35,7 @@ class Matrix
                     this->_begin[i] = x._begin[i];
         }
 
-        Matrix(tab_type init) : _column(init.size()), _row((init.begin())->size()) {
+        Matrix(const tab_type init) : _row(init.size()), _column((init.begin())->size()) {
             this->_begin = new vector[this->_row];
             size_type i = 0;
             for (typename tab_type::const_iterator it = init.begin(); it < init.end(); it++) {
@@ -55,11 +61,11 @@ class Matrix
             return *this;
         }
 
-        Matrix& operator= (tab_type init)
+        Matrix& operator= (const tab_type init)
         {		
             delete[] this->_begin;
-            this->_row = (init.begin())->size();
-            this->_column = init.size();
+            this->_row = init.size();
+            this->_column = (init.begin())->size();
             this->_begin = new vector[this->_row];
             size_type i = 0;
             for (typename tab_type::const_iterator it = init.begin(); it < init.end(); it++) {
@@ -77,22 +83,13 @@ class Matrix
             return std::make_pair(this->_row, this->_column);
         }
 
-        void        zeros(size_type m, size_type n) {
-            this->_row = m;
-            this->_column = n;
-            delete[] this->_begin;
-            this->_begin = new vector[n];
-            for (size_type i = 0; i < n; i++)
-                this->_begin[i].zeros(m);
-        }
-
-        void        insert_column(const vector& v) {
+        void        insert_row(const vector& v) {
             this->_row = v.size();
-            vector *tmp = new vector[this->_column + 1];
-            for (size_type i = 0; i < this->_column; i++)
+            vector *tmp = new vector[this->_row + 1];
+            for (size_type i = 0; i < this->_row; i++)
                 tmp[i] = this->_begin[i];
-            tmp[this->_column] = v;
-            ++this->_column;
+            tmp[this->_row] = v;
+            ++this->_row;
             delete[] this->_begin;
             this->_begin = tmp;
         }
@@ -102,24 +99,46 @@ class Matrix
         const vector&	operator[] (size_type n) const { return this->_begin[n]; }
         
         void            add(const Matrix &x) {
-            for (size_type i = 0; i < this->_column; i++)
+            for (size_type i = 0; i < this->_row; i++)
                 this->_begin[i].add(x[i]);
         }
 
         void            sub(const Matrix &x) {
-            for (size_type i = 0; i < this->_column; i++)
+            for (size_type i = 0; i < this->_row; i++)
                 this->_begin[i].sub(x[i]);
         }
 
         void            scl(const value_type &a) {
-            for (size_type i = 0; i < this->_column; i++)
+            for (size_type i = 0; i < this->_row; i++)
                 this->_begin[i].scl(a);
+        }
+
+        vector          mul_vec(const vector &vect) {
+            vector v(vect.size(), 0);
+            for (size_type i = 0; i < this->_row; i++) {
+                for (size_type j = 0; j < this->_column; j++) {
+                    v[i] += vect[j] * this->_begin[i][j];
+                }
+            }
+            return v;
+        }
+
+        Matrix          mul_mat(const Matrix &mat) {
+            Matrix res(mat._column, mat._row, 0);
+            for (size_type i = 0; i < this->_row; i++) {
+                for (size_type j = 0; j < mat._row; j++) {
+                    for (size_type k = 0; k < this->_column; k++) {
+                        res[i][j] += this->_begin[i][k] * mat[k][j];
+                    }
+                }
+            }
+            return res;
         }
 
     private:
         vector			*_begin;
-        size_type 		_column;
         size_type 		_row;
+        size_type 		_column;
 };
 
 template<typename T>
@@ -131,7 +150,7 @@ std::ostream& operator << (std::ostream& os, const Matrix<T> &mat) {
 
             if (j != 0)
                 os << "\t";
-            os << mat[j][i];
+            os << mat[i][j];
         }
         if (i != mat.shape().first - 1)
             os << "]" << std::endl;

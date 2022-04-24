@@ -28,21 +28,21 @@ void    test_vector() {
 
 void    test_matrix() {
     std::cout << "------ MATRIX ------" << std::endl;
-    Matrix<double> m1 = {{1., 3.}, {2., 4.}};
+    Matrix<double> m1 = {{1., 2.}, {3., 4.}};
     std::cout << "m1 = " << std::endl << m1 << std::endl;
 
-    Matrix<double> m2 = {{7., -2.}, {4., 2.}};
+    Matrix<double> m2 = {{7., 4.}, {-2., 2.}};
     std::cout << "m2 = " << std::endl << m2 << "---\n" << std::endl;
     
     std::cout << "m1.add(m2) = \n";
     m1.add(m2);
     std::cout << m1 << std::endl;
-    m1 = {{1., 3.}, {2., 4.}};
+    m1 = {{1., 2.}, {3., 4.}};
 
     std::cout << "m1.sub(m2) = \n";
     m1.sub(m2);
     std::cout << m1 << std::endl;
-    m1 = {{1., 3.}, {2., 4.}};
+    m1 = {{1., 2.}, {3., 4.}};
 
     std::cout << "m1.scl(2.) = \n";
     m1.scl(2.);
