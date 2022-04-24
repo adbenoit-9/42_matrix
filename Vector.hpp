@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <iomanip>
+# include <cmath>
 
 template < class T = float>
 class Vector
@@ -114,6 +115,30 @@ class Vector
             return res;
         }
         
+        value_type      norm_1(void) {
+            value_type n;
+            for (size_type i = 0; i < this->_size; i++) {
+                if (this->_begin[i] < 0)
+                    n -= this->_begin[i];
+                else
+                    n += this->_begin[i];
+            }
+            return n;
+        }
+
+        value_type      norm(void) {
+            return pow(this->dot(*this), 0.5);
+        }
+
+        value_type      norm_inf(void) {
+            value_type val;
+            value_type max = this->_begin[0] < 0 ? -this->_begin[0] : this->_begin[0];
+            for (size_type i = 1; i < this->_size; i++) {
+                val = this->_begin[i] < 0 ? -this->_begin[i] : this->_begin[i];
+                max = val > max ? val : max;
+            }
+            return max;
+        }
         
     private:
         pointer			_begin;
