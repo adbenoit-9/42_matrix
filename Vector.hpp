@@ -105,6 +105,14 @@ class Vector
             for (size_type i = 0; i < this->_size; i++)
                 this->_begin[i] *= a;
         }
+
+        value_type      dot(Vector v) {
+            value_type res = 0;
+            for (size_type i = 0; i < this->_size; i++) {
+                res += this->_begin[i] * v[i];
+            }
+            return res;
+        }
         
         
     private:
