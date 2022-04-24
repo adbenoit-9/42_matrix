@@ -135,11 +135,19 @@ class Matrix
             return res;
         }
 
-        value_type  trace(void) {
+        value_type      trace(void) {
             value_type tr = 0;
             for (size_type i = 0; i < this->_row; i++)
                 tr += this->_begin[i][i];
             return tr;
+        }
+
+        Matrix          transpose(void) {
+            Matrix tp(this->_column, this->_row, 0);
+            for (size_type i = 0; i < this->_row; i++)
+                for (size_type j = 0; j < this->_column; j++)
+                    tp[j][i] = this->_begin[i][j];
+            return tp;
         }
 
     private:
