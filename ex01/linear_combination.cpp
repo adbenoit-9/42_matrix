@@ -3,8 +3,7 @@
 
 template<class V, typename K>
 V   linear_combination(V *u, K *coefs, size_t size) {
-    V res;
-    res.zeros(u[0].size());
+    V res(u[0].size(), 0);
     for (size_t i = 0; i < u[0].size(); i++) {
         for (typename V::size_type j = 0; j < size; j++)
             res[i] += u[j][i] * coefs[j];
@@ -13,12 +12,9 @@ V   linear_combination(V *u, K *coefs, size_t size) {
 }
 
 int main() {
-    Vector<float> e1(3, 0);
-    e1[0] = 1;
-    Vector<float> e2(3, 0);
-    e2[1] = 1;
-    Vector<float> e3(3, 0);
-    e3[2] = 1;
+    Vector<float> e1 = {1, 0, 0};
+    Vector<float> e2 = {0, 1, 0};
+    Vector<float> e3 = {0, 0, 1};
     Vector<float> vect_list[] = {e1, e2, e3};
     float           coef1[] = {10., -2., 0.5};
     std::cout   << "e1 =\n" << e1 << std::endl
@@ -29,13 +25,8 @@ int main() {
     std::cout << "linear_combination([e1, e2, e3], coef1) =\n" << res;
 
     std::cout << "----\n\n";
-    Vector<float> v1(3, 0);
-    v1[0] = 1.;
-    v1[1] = 2.;
-    v1[2] = 3.;
-    Vector<float> v2(3, 0);
-    v2[1] = 10.;
-    v2[2] = -100.;
+    Vector<float> v1 = {1., 2., 3.};
+    Vector<float> v2 = {0., 10., -100.};
     Vector<float> vect_list2[] = {v1, v2};
     float           coef2[] = {10., -2};
     std::cout   << "v1 =\n" << v1 << std::endl

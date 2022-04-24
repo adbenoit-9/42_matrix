@@ -8,14 +8,16 @@ template < class T = float>
 class Matrix
 {
     public:
-        typedef	T           value_type;
-        typedef Vector<T>   vector;
-        typedef	T&          reference;
-        typedef	const T&    const_reference;
-        typedef	T*          pointer;
-        typedef	const T*    const_pointer;
-        typedef	ptrdiff_t   difference_type;
-        typedef	size_t      size_type;
+        typedef	T                                   value_type;
+        typedef Vector<T>                           vector;
+        typedef	T&                                  reference;
+        typedef	const T&                            const_reference;
+        typedef	T*                                  pointer;
+        typedef	const T*                            const_pointer;
+        typedef	ptrdiff_t                           difference_type;
+        typedef	size_t                              size_type;
+        typedef std::initializer_list<value_type>   list_type;
+        typedef std::initializer_list<list_type>    tab_type;
 
         Matrix() : _row(0), _column(0) {
             this->_begin = new vector[0];
@@ -26,7 +28,16 @@ class Matrix
             for (size_type i = 0; i < this->_row; i++)
                     this->_begin[i] = x._begin[i];
         }
-        
+
+        Matrix(tab_type init) : _column(init.size()), _row((init.begin())->size()) {
+            this->_begin = new vector[this->_row];
+            size_type i = 0;
+            for (typename tab_type::const_iterator it = init.begin(); it < init.end(); it++) {
+                this->_begin[i] = *it;
+                ++i;
+            }
+        }
+
         ~Matrix() {
             delete[] this->_begin;
         }
@@ -35,12 +46,26 @@ class Matrix
         {		
             if (this == &x)
                 return *this;
-            delete this->begin;
+            delete[] this->_begin;
             this->_begin = new vector[x._row];
             this->_column = x._column;
             this->_row = x._row;
             for (size_type i = 0; i < this->_row; i++)
                     this->_begin[i] = x._begin[i];
+            return *this;
+        }
+
+        Matrix& operator= (tab_type init)
+        {		
+            delete[] this->_begin;
+            this->_row = (init.begin())->size();
+            this->_column = init.size();
+            this->_begin = new vector[this->_row];
+            size_type i = 0;
+            for (typename tab_type::const_iterator it = init.begin(); it < init.end(); it++) {
+                this->_begin[i] = *it;
+                ++i;
+            }
             return *this;
         }
         
@@ -98,7 +123,7 @@ class Matrix
 };
 
 template<typename T>
-std::ostream& operator << (std::ostream& os, Matrix<T> &mat) {
+std::ostream& operator << (std::ostream& os, const Matrix<T> &mat) {
     os << "[";
     for (typename Matrix<T>::size_type i = 0; i < mat.shape().first; i++) {
         os << "[";
