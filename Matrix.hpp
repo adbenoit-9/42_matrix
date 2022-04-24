@@ -126,13 +126,20 @@ class Matrix
         Matrix          mul_mat(const Matrix &mat) {
             Matrix res(mat._column, mat._row, 0);
             for (size_type i = 0; i < this->_row; i++) {
-                for (size_type j = 0; j < mat._row; j++) {
+                for (size_type j = 0; j < mat._column; j++) {
                     for (size_type k = 0; k < this->_column; k++) {
                         res[i][j] += this->_begin[i][k] * mat[k][j];
                     }
                 }
             }
             return res;
+        }
+
+        value_type  trace(void) {
+            value_type tr = 0;
+            for (size_type i = 0; i < this->_row; i++)
+                tr += this->_begin[i][i];
+            return tr;
         }
 
     private:
