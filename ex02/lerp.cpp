@@ -2,7 +2,7 @@
 #include "../Matrix.hpp"
 
 template<class T>
-T lerp(T u, T v, float t) {
+T lerp(T u, T v, double t) {
     u.scl(1 - t);
     v.scl(t);
     u.add(v);
@@ -10,23 +10,23 @@ T lerp(T u, T v, float t) {
 }
 
 int main() {
-    Vector<float> res = lerp< Vector<float> >({0.}, {1.}, 0.);
+    Vector<double> res = lerp< Vector<double> >({0.}, {1.}, 0.);
     std::cout   << "lerp(0., 1., 0.) = \n" << res << std::endl;
-    res = lerp< Vector<float> >({0.}, {1.}, 1.);
+    res = lerp< Vector<double> >({0.}, {1.}, 1.);
     std::cout   << "lerp(0., 1., 1.) = \n" << res << std::endl;
-    res = lerp< Vector<float> >({0.}, {1.}, 0.5);
+    res = lerp< Vector<double> >({0.}, {1.}, 0.5);
     std::cout   << "lerp(0., 1., 0.5) = \n" << res << std::endl;
-    res = lerp< Vector<float> >({21.}, {42.}, 0.3);
+    res = lerp< Vector<double> >({21.}, {42.}, 0.3);
     std::cout   << "lerp(21., 42., 0.3) = \n" << res << std::endl;
-    res = lerp< Vector<float> >(
+    res = lerp< Vector<double> >(
             {2., 1.},
             {4., 2.},
             0.3
         );
     std::cout   << "lerp([2., 1.], [4., 2.], 0.3) =\n"
                 << res << std::endl;
-    Matrix<float> res1;
-    res1 = lerp< Matrix<float> >(
+    Matrix<double> res1;
+    res1 = lerp< Matrix<double> >(
             {{2., 3.}, {1., 4.}},
             {{20., 30.}, {10., 40.}},
             0.5

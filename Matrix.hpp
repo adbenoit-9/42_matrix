@@ -4,7 +4,7 @@
 # include "Vector.hpp"
 # include <utility>
 
-template < class T = float>
+template < class T = double>
 class Matrix
 {
     public:

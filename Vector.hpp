@@ -5,7 +5,7 @@
 # include <iomanip>
 # include <cmath>
 
-template < class T = float>
+template < class T = double>
 class Vector
 {
     public:
