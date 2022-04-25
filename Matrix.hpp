@@ -246,6 +246,34 @@ class Matrix
             return det;
         }
 
+        Matrix      comatrice(void) {
+            Matrix a;
+            Matrix com(this->_row, this->_column, 0);
+            for (size_type i = 0; i < this->_row; i++) {
+                for (size_type j = 0; j < this->_column; j++) {
+                    a = *this;
+                    for (size_type k = 0; k < this->_row; k++) {
+                        if (k != i)
+                            a[k][j] = 0;
+                        else
+                            a[k][j] = 1;
+                    }
+                    com[i][j] = a.determinant();
+                }
+            }
+            return com;
+        }
+
+        Matrix      inverse(void) {
+            value_type det = this->determinant();
+            if (!det)
+                return {};
+            Matrix com = this->comatrice();
+            Matrix tp = com.transpose();
+            tp.scl(1 / det);
+            return tp;
+        }
+
     private:
         vector			*_begin;
         size_type 		_row;
