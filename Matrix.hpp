@@ -200,7 +200,7 @@ class Matrix
                 return ;
             vector tmp;
             for (size_type i = 0; i < this->_row; i++) {
-                if (i != rank) {
+                if (&mat[i] != &row && mat[i][rank]) {
                     tmp = row;
                     tmp.scl(mat[i][rank]);
                     mat[i].sub(tmp);
@@ -215,20 +215,17 @@ class Matrix
             Matrix res = *this;
             Matrix tmp;
             size_type j;
-            /* arrange to try to get out 0 from the diag */
             this->row_arrange(res);
-            for (size_type k = 0; k < this->_row && k < this->_column ; k++) {
-                if (res[k][k]) {
-                    /* set diag elements = 1 */
-                    res[k].scl(1 / res[k][k]);
-                    /* set column k elem = 0 */ 
-                    this->substract_row(res, res[k], k);
+            for (size_type k = 0; k < this->_row; k++) {
+                for (size_type j = k; j < this->_column; j++) {
+                    if (res[k][j]) {
+                        res[k].scl(1 / res[k][j]);
+                        this->substract_row(res, res[k], j);
+                        break ;
+                    }
                 }
             }
-            for (size_type k = this->_row - 1; k > 0; k--)
-                this->substract_row(res, res[k], k);
-            /* case if no 1 on a colum */
-
+            this->row_arrange(res);
             return res;
         }
 
@@ -279,7 +276,7 @@ class Matrix
             Matrix a = this->row_echelon();
             for (size_type i = 0; i < this->_row; i++) {
                 for (size_type j = 0; j < this->_row; j++) {
-                    if (a[i][j] != 0) {
+                    if (a[i][j] < -0.00001 || a[i][j] > 0.00001) {
                         ++r;
                         break ;
                     }
