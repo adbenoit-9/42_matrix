@@ -274,6 +274,20 @@ class Matrix
             return tp;
         }
 
+        size_type   rank(void) {
+            size_type r = 0;
+            Matrix a = this->row_echelon();
+            for (size_type i = 0; i < this->_row; i++) {
+                for (size_type j = 0; j < this->_row; j++) {
+                    if (a[i][j] != 0) {
+                        ++r;
+                        break ;
+                    }
+                }
+            }
+            return r;
+        }
+
     private:
         vector			*_begin;
         size_type 		_row;
