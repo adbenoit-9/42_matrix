@@ -166,44 +166,43 @@ class Matrix
             return mat;
         }
 
+        void            substract_row(Matrix &mat, const vector &row, const value_type rank) {
+            if (row[rank] != 1)
+                return ;
+            vector tmp;
+            for (size_type i = 0; i < this->_row; i++) {
+                if (i != rank) {
+                    tmp = row;
+                    tmp.scl(mat[i][rank]);
+                    mat[i].sub(tmp);
+                }
+            }
+        }
+
         Matrix          row_echelon(void) {
+            std::cout << "---- start ----\n";
+            std::cout << *this << "--" << std::endl;
             if (this->_row <= 1)
                 return *this;
 
             Matrix res = *this;
             Matrix tmp;
             size_type j;
-            /* res[k][k] need to be != 0 */
+            /* arrange to try to get out 0 from the diag */
             this->row_arrange(res);
-            /* res[k][k] need to = 1 */
             for (size_type k = 0; k < this->_row && k < this->_column ; k++) {
-                j = k;
-                for (; j < this->_column; j++) {
-                    std::cout << res << std::endl;
-                        if (res[k][j]) {
-                            res[k].scl(1 / res[k][j]);
-                            break ;
-                        }
-                }
-                /* res[i][j] need to = 0*/
-                for (size_type i = j + 1; i < this->_row; i++) {
-                    if (res[i][j]) {
-                        tmp = res;
-                        tmp[j].scl(res[i][j]);
-                        res[i].sub(tmp[j]);
-                    }
+                if (res[k][k]) {
+                    /* set diag elements = 1 */
+                    res[k].scl(1 / res[k][k]);
+                    /* set column k elem = 0 */ 
+                    this->substract_row(res, res[k], k);
                 }
             }
-            for (size_type k = this->_row - 1; k > 0; k--) {
-                for (ssize_t i = k - 1; i >= 0; i--) {
-                    if (res[i][k] && res[k][k] == 1) {
-                        tmp = res;
-                        tmp[k].scl(res[i][k]);
-                        res[i].sub(tmp[k]);
-                    }
-                }
-            }
-            this->row_arrange(res);
+            for (size_type k = this->_row - 1; k > 0; k--)
+                this->substract_row(res, res[k], k);
+            /* case if no 1 on a colum */
+
+            std::cout << "---- end ----\n";
             return res;
         }
 
