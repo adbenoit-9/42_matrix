@@ -182,9 +182,9 @@ class Matrix
         Matrix          &row_arrange(Matrix &mat) {
             Matrix tmp;
             for (size_type k = 0; k < this->_row && k < this->_column ; k++) {
-                if (!mat[k][k]) {
+                if (mat[k][k] == 0) {
                     for (size_type i = k; i < this->_row; i++) {
-                        if (mat[i][k]) {
+                        if (mat[i][k] != 0) {
                             tmp = mat;
                             mat[k] = mat[i];
                             mat[i] = tmp[k];
@@ -195,12 +195,12 @@ class Matrix
             return mat;
         }
 
-        void            substract_row(Matrix &mat, const vector &row, const value_type rank) {
+        void            substract_row(Matrix &mat, const vector &row, const size_type rank) {
             if (row[rank] != 1)
                 return ;
             vector tmp;
             for (size_type i = 0; i < this->_row; i++) {
-                if (&mat[i] != &row && mat[i][rank]) {
+                if (&mat[i] != &row && mat[i][rank] != 0) {
                     tmp = row;
                     tmp.scl(mat[i][rank]);
                     mat[i].sub(tmp);
@@ -218,7 +218,7 @@ class Matrix
             this->row_arrange(res);
             for (size_type k = 0; k < this->_row; k++) {
                 for (size_type j = k; j < this->_column; j++) {
-                    if (res[k][j]) {
+                    if (res[k][j] != 0) {
                         res[k].scl(1 / res[k][j]);
                         this->substract_row(res, res[k], j);
                         break ;
@@ -263,7 +263,7 @@ class Matrix
 
         Matrix      inverse(void) {
             value_type det = this->determinant();
-            if (!det)
+            if (det == 0)
                 return {};
             Matrix com = this->comatrice();
             Matrix tp = com.transpose();
@@ -276,7 +276,7 @@ class Matrix
             Matrix a = this->row_echelon();
             for (size_type i = 0; i < this->_row; i++) {
                 for (size_type j = 0; j < this->_row; j++) {
-                    if (a[i][j] < -0.00001 || a[i][j] > 0.00001) {
+                    if (a[i][j] != 0) {
                         ++r;
                         break ;
                     }
