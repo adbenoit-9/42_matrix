@@ -26,6 +26,5 @@ int main() {
     u = {4., 2., -3.};
     v = {-2., -5., 16.};
     std::cout   << "cross_product({4., 2., -3.}, {-2., -5., 16.}) =\n"
-                << cross_product<double>(u, v) << std::endl
-                << std::endl;
+                << cross_product<double>(u, v) << std::endl;
 }

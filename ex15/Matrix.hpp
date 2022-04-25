@@ -3,6 +3,7 @@
 
 # include "Vector.hpp"
 # include <utility>
+# include <initializer_list>
 
 template < class T = double>
 class Matrix
@@ -23,13 +24,13 @@ class Matrix
             this->_begin = new vector[0];
         }
 
-        Matrix(size_type m, size_type n, const value_type &val) :  _column(n), _row(m){
+        Matrix(size_type m, size_type n, const value_type &val) :  _row(m), _column(n) {
             this->_begin = new vector[this->_row];
             for (size_type i = 0; i < this->_row; i++)
-                this->_begin[i] = vector(this->_column, 0);
+                this->_begin[i] = vector(this->_column, val);
         }
         
-        Matrix(const Matrix& x) : _column(x._column), _row(x._row)  {
+        Matrix(const Matrix& x) :  _row(x._row), _column(x._column) {
             this->_begin = new vector[x._row];
             for (size_type i = 0; i < this->_row; i++)
                     this->_begin[i] = x._begin[i];
@@ -214,7 +215,6 @@ class Matrix
 
             Matrix res = *this;
             Matrix tmp;
-            size_type j;
             this->row_arrange(res);
             for (size_type k = 0; k < this->_row; k++) {
                 for (size_type j = k; j < this->_column; j++) {

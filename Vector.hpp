@@ -4,6 +4,7 @@
 # include <iostream>
 # include <iomanip>
 # include <cmath>
+# include <initializer_list>
 
 template < class T = double>
 class Vector

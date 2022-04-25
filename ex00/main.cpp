@@ -1,7 +1,7 @@
 #include "../Vector.hpp"
 #include "../Matrix.hpp"
 
-void    test_vector() {
+void    test_vector(void) {
     std::cout << "------ VECTOR ------" << std::endl;
     Vector<double> u = {2., 3.};
     std::cout << "u = " << std::endl << u << std::endl;
@@ -26,7 +26,7 @@ void    test_vector() {
     std::cout << std::endl;
 }
 
-void    test_matrix() {
+void    test_matrix(void) {
     std::cout << "------ MATRIX ------" << std::endl;
     Matrix<double> m1 = {{1., 2.}, {3., 4.}};
     std::cout << "m1 = " << std::endl << m1 << std::endl;
@@ -49,7 +49,7 @@ void    test_matrix() {
     std::cout << m1 << std::endl;
 }
 
-int main () {
+int main (void) {
     test_vector();
     test_matrix();
 }

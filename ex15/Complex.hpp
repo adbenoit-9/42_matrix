@@ -99,8 +99,8 @@ class Complex {
     }
 
     private:
-        value_type _im;
         value_type _r;
+        value_type _im;
 };
 
 #endif
