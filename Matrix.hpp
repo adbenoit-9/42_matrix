@@ -94,6 +94,35 @@ class Matrix
             this->_begin = tmp;
         }
 
+        void        remove_row(const size_type& k) {
+            vector *tmp = new vector[this->_row - 1];
+            for (size_type i = 0, j = 0; i < this->_row; i++) {
+                if (i != k) {
+                    tmp[j] = this->_begin[i];
+                    ++j;
+                }
+            }
+            --this->_row;
+            delete[] this->_begin;
+            this->_begin = tmp;
+        }
+
+        void        remove_col(const size_type& k) {
+            vector *tmp = new vector[this->_row];
+            for (size_type i = 0; i < this->_row; i++) {
+                tmp[i] = vector(this->_column - 1, 0);
+                for (size_type j = 0, m = 0; j < this->_column; j++) {
+                    if (j != k) {
+                        tmp[i][m] = this->_begin[i][j];
+                        ++m;
+                    }
+                }
+            }
+            --this->_column;
+            delete[] this->_begin;
+            this->_begin = tmp;
+        }
+
         // 				~ Operators ~
         vector&		operator[] (size_type n) { return this->_begin[n]; }
         const vector&	operator[] (size_type n) const { return this->_begin[n]; }
@@ -180,8 +209,6 @@ class Matrix
         }
 
         Matrix          row_echelon(void) {
-            std::cout << "---- start ----\n";
-            std::cout << *this << "--" << std::endl;
             if (this->_row <= 1)
                 return *this;
 
@@ -202,8 +229,21 @@ class Matrix
                 this->substract_row(res, res[k], k);
             /* case if no 1 on a colum */
 
-            std::cout << "---- end ----\n";
             return res;
+        }
+
+        value_type  determinant(void) {
+            if (this->size() == 4)
+                return this->_begin[0][0] * this->_begin[1][1] - this->_begin[0][1] * this->_begin[1][0];
+            Matrix a;
+            value_type det = 0;
+            for (size_type i = 0; i < this->_row; i++) {
+                    a = *this;
+                    a.remove_row(i);
+                    a.remove_col(0);
+                    det += this->_begin[i][0] * pow(-1, i) * a.determinant();
+                }
+            return det;
         }
 
     private:
