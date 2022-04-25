@@ -150,6 +150,63 @@ class Matrix
             return tp;
         }
 
+        Matrix          &row_arrange(Matrix &mat) {
+            Matrix tmp;
+            for (size_type k = 0; k < this->_row && k < this->_column ; k++) {
+                if (!mat[k][k]) {
+                    for (size_type i = k; i < this->_row; i++) {
+                        if (mat[i][k]) {
+                            tmp = mat;
+                            mat[k] = mat[i];
+                            mat[i] = tmp[k];
+                        }
+                    }
+                }
+            }
+            return mat;
+        }
+
+        Matrix          row_echelon(void) {
+            if (this->_row <= 1)
+                return *this;
+
+            Matrix res = *this;
+            Matrix tmp;
+            size_type j;
+            /* res[k][k] need to be != 0 */
+            this->row_arrange(res);
+            /* res[k][k] need to = 1 */
+            for (size_type k = 0; k < this->_row && k < this->_column ; k++) {
+                j = k;
+                for (; j < this->_column; j++) {
+                    std::cout << res << std::endl;
+                        if (res[k][j]) {
+                            res[k].scl(1 / res[k][j]);
+                            break ;
+                        }
+                }
+                /* res[i][j] need to = 0*/
+                for (size_type i = j + 1; i < this->_row; i++) {
+                    if (res[i][j]) {
+                        tmp = res;
+                        tmp[j].scl(res[i][j]);
+                        res[i].sub(tmp[j]);
+                    }
+                }
+            }
+            for (size_type k = this->_row - 1; k > 0; k--) {
+                for (ssize_t i = k - 1; i >= 0; i--) {
+                    if (res[i][k] && res[k][k] == 1) {
+                        tmp = res;
+                        tmp[k].scl(res[i][k]);
+                        res[i].sub(tmp[k]);
+                    }
+                }
+            }
+            this->row_arrange(res);
+            return res;
+        }
+
     private:
         vector			*_begin;
         size_type 		_row;
