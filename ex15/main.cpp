@@ -88,22 +88,26 @@ void    test_dot(void) {
     std::cout << u.dot(v) << std::endl << std::endl;
 }
 
-// void    test_norm(void) {
-//     std::cout << "------ norm ------" << std::endl;
-//     Vector<Complex> u = {
-//         Complex(2., 21.),
-//         Complex(-2., -1.),
-//         Complex(4., 3.)};
-//     std::cout   << "u =\n" << u << std::endl
-//                 << "norm_1 = " << u.norm_1() << std::endl
-//                 << "norm = " << u.norm() << std::endl
-//                 << "norm_inf = " << u.norm_inf() << std::endl
-//                 << std::endl;
-// }
+void    test_norm(void) {
+    std::cout << "------ norm ------" << std::endl;
+    Vector<Complex> u = {
+        Complex(2., 21.),
+        Complex(-2., -1.),
+        Complex(4., 3.)};
+    std::cout   << "u =\n" << u << std::endl
+                << "norm_1 = " << u.norm_1() << std::endl
+                << "norm = " << u.norm() << std::endl
+                << "norm_inf = " << u.norm_inf() << std::endl
+                << std::endl;
+}
 
 void    test_cos(void) {
     std::cout << "------ angle_cos ------" << std::endl;
-
+    Vector<Complex> u = {Complex(2., 21.), Complex(-2., -1.)};
+    Vector<Complex> v = {Complex(9., -8.), Complex(0., 2.)};
+    std::cout   << "angle_cos =\n"
+                << angle_cos<Complex>(u, v) << std::endl
+                << std::endl;
 }
 
 void    test_cp(void) {
@@ -166,8 +170,8 @@ int main () {
     test_lc();
     test_lerp();
     test_dot();
-    // test_norm();
-    // test_cos();
+    test_norm();
+    test_cos();
     test_cp();
     test_mul();
     test_trace();

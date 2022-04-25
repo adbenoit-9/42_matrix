@@ -115,26 +115,25 @@ class Vector
             return res;
         }
         
-        value_type      norm_1(void) {
-            value_type n = 0;
-            for (size_type i = 0; i < this->_size; i++) {
-                if (this->_begin[i] < 0)
-                    n -= this->_begin[i];
-                else
-                    n += this->_begin[i];
-            }
+        double      norm_1(void) {
+            double n = 0;
+            for (size_type i = 0; i < this->_size; i++)
+                    n += (this->_begin[i]).module();
             return n;
         }
 
-        value_type      norm(void) {
-            return pow(this->dot(*this), 0.5);
+        double      norm(void) {
+            double sum = 0;
+            for (size_type i = 0; i < this->_size; i++)
+                    sum += pow((this->_begin[i]).module(), 2);
+            return pow(sum, 0.5);
         }
 
-        value_type      norm_inf(void) {
-            value_type val;
-            value_type max = this->_begin[0] < 0 ? -this->_begin[0] : this->_begin[0];
+        double      norm_inf(void) {
+            double val;
+            double max = this->_begin[0].module();
             for (size_type i = 1; i < this->_size; i++) {
-                val = this->_begin[i] < 0 ? -this->_begin[i] : this->_begin[i];
+                val = (this->_begin[i]).module();
                 max = val > max ? val : max;
             }
             return max;

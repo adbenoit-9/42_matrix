@@ -2,8 +2,8 @@
 # define COMPLEX_HPP
 
 # include <iostream>
-# include "../Vector.hpp"
-# include "../Matrix.hpp"
+# include "Vector.hpp"
+# include "Matrix.hpp"
 # include "functions.hpp"
 
 class Complex {
@@ -19,6 +19,10 @@ class Complex {
         this->_r = c._r;
         this->_im = c._im;
         return *this;
+    }
+
+    value_type  module(void) {
+        return pow(pow(this->_r, 2) + pow(this->_im, 2), 0.5);
     }
 
     Complex&    operator=(const value_type& r) {
