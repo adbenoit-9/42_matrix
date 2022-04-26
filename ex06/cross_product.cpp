@@ -12,7 +12,7 @@ ft::Vector<T>   cross_product(ft::Vector<T> &u, ft::Vector<T> &v) {
     };
 }
 
-int main() {
+int main(void) {
     ft::Vector<double> u = {0., 0., 1.};
     ft::Vector<double> v = {1., 0., 0.};
     std::cout   << "cross_product({0., 0., 1.}, {1., 0., 0.}) =\n"

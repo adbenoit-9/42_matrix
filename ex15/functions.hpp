@@ -4,7 +4,7 @@
 # include <vector>
 
 template<class V, typename K>
-V   linear_combination(std::vector<V> u, std::vector<K> coefs) {
+V   linear_combination(const std::vector<V> &u, const std::vector<K> &coefs) {
     if (u.size() != coefs.size())
         throw typename V::sizeError();
     if  (u.size() == 0)

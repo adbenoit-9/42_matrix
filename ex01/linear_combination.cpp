@@ -3,7 +3,7 @@
 #include <vector>
 
 template<class V, typename K>
-V   linear_combination(std::vector<V> u, std::vector<K> coefs) {
+V   linear_combination(const std::vector<V> &u, const std::vector<K> &coefs) {
     if (u.size() != coefs.size())
         throw typename V::sizeError();
     if  (u.size() == 0)
@@ -21,7 +21,7 @@ V   linear_combination(std::vector<V> u, std::vector<K> coefs) {
     return res;
 }
 
-int main() {
+int main(void) {
     ft::Vector<double> e1 = {1, 0, 0};
     ft::Vector<double> e2 = {0, 1, 0};
     ft::Vector<double> e3 = {0, 0, 1};

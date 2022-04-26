@@ -1,7 +1,7 @@
 #include "../Vector.hpp"
 #include "../Matrix.hpp"
 
-int main() {
+int main(void) {
     ft::Matrix<double> u = {
         {1., -1.},
         {-1., 1.}

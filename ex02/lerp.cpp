@@ -9,7 +9,7 @@ T lerp(T u, T v, double t) {
     return u;
 }
 
-int main() {
+int main(void) {
     ft::Vector<double> res = lerp< ft::Vector<double> >({0.}, {1.}, 0.);
     std::cout   << "lerp(0., 1., 0.) = \n" << res << std::endl;
     res = lerp< ft::Vector<double> >({0.}, {1.}, 1.);

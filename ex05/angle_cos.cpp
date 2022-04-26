@@ -9,7 +9,7 @@ T   angle_cos(ft::Vector<T> &u, ft::Vector<T> &v) {
     return u.dot(v) / d;
 }
 
-int main() {
+int main(void) {
     ft::Vector<double> u = {1., 0.};
     ft::Vector<double> v = {1., 0.};
     std::cout   << "angle_cos({1., 0.}, {1., 0.}) =\n"

@@ -11,7 +11,7 @@ ft::Matrix<double> projection(double fov, double ratio, double near, double far)
     return proj;
 }
 
-int main() {
+int main(void) {
     ft::Matrix<double> p = projection(90, 0.8, 0.1, 100);
     for (size_t i = 0; i < 4; i++) {
         for (size_t j = 0; j < 4; j++) {

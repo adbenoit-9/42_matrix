@@ -1,7 +1,7 @@
 #include "../Vector.hpp"
 #include "../Matrix.hpp"
 
-int main() {
+int main(void) {
     std::cout << "--- multiply a matrix by a vector ---\n";
     ft::Matrix<double> u = {{1., 0.}, {0., 1.}};
     ft::Vector<double> v = {4., 2.};
