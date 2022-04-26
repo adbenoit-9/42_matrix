@@ -228,7 +228,6 @@ class Matrix
 
             Matrix res = *this;
             Matrix tmp;
-            this->row_arrange(res);
             for (size_type k = 0; k < this->_row; k++) {
                 for (size_type j = k; j < this->_column; j++) {
                     if (res[k][j] != 0) {
@@ -258,7 +257,7 @@ class Matrix
             return det;
         }
 
-        Matrix      comatrice(void) {
+        Matrix      comatrix(void) {
             Matrix a;
             Matrix com(this->_row, this->_column, 0);
             for (size_type i = 0; i < this->_row; i++) {
@@ -280,7 +279,7 @@ class Matrix
             value_type det = this->determinant();
             if (det == 0)
                 return {};
-            Matrix com = this->comatrice();
+            Matrix com = this->comatrix();
             Matrix tp = com.transpose();
             tp.scl(1 / det);
             return tp;
