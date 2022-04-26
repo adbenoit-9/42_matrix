@@ -5,12 +5,13 @@
 # include <utility>
 # include <initializer_list>
 
+namespace ft{
 template < class T = double>
 class Matrix
 {
     public:
         typedef	T                                   value_type;
-        typedef Vector<T>                           vector;
+        typedef ft::Vector<T>                           vector;
         typedef	T&                                  reference;
         typedef	const T&                            const_reference;
         typedef	T*                                  pointer;
@@ -292,11 +293,11 @@ class Matrix
 };
 
 template<typename T>
-std::ostream& operator << (std::ostream& os, const Matrix<T> &mat) {
+std::ostream& operator << (std::ostream& os, const ft::Matrix<T> &mat) {
     os << "[";
-    for (typename Matrix<T>::size_type i = 0; i < mat.shape().first; i++) {
+    for (typename ft::Matrix<T>::size_type i = 0; i < mat.shape().first; i++) {
         os << "[";
-        for (typename Matrix<T>::size_type j = 0; j < mat.shape().second; j++) {
+        for (typename ft::Matrix<T>::size_type j = 0; j < mat.shape().second; j++) {
 
             if (j != 0)
                 os << "\t";
@@ -309,6 +310,7 @@ std::ostream& operator << (std::ostream& os, const Matrix<T> &mat) {
     }
     os << "]" << std::endl;
     return os;
+}
 }
 
 #endif

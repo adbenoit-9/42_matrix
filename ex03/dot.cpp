@@ -2,8 +2,8 @@
 #include "../Matrix.hpp"
 
 int main() {
-    Vector<double> u = {0., 0.};
-    Vector<double> v = {1., 1.};
+    ft::Vector<double> u = {0., 0.};
+    ft::Vector<double> v = {1., 1.};
     std::cout << u.dot(v) << std::endl;
 
     u = {1., 1.};

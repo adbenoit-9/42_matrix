@@ -2,13 +2,13 @@
 #include "../Matrix.hpp"
 
 template<typename T>
-T   angle_cos(Vector<T> &u, Vector<T> &v) {
+T   angle_cos(ft::Vector<T> &u, ft::Vector<T> &v) {
     return u.dot(v) / (u.norm() * v.norm());
 }
 
 int main() {
-    Vector<double> u = {1., 0.};
-    Vector<double> v = {1., 0.};
+    ft::Vector<double> u = {1., 0.};
+    ft::Vector<double> v = {1., 0.};
     std::cout   << "angle_cos({1., 0.}, {1., 0.}) =\n"
                 << angle_cos<double>(u, v) << std::endl
                 << std::endl;

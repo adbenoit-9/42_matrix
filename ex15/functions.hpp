@@ -22,12 +22,12 @@ T lerp(T u, T v, double t) {
 }
 
 template<typename T>
-T   angle_cos(Vector<T> &u, Vector<T> &v) {
+T   angle_cos(ft::Vector<T> &u, ft::Vector<T> &v) {
     return u.dot(v) / (u.norm() * v.norm());
 }
 
 template<typename T>
-Vector<T>   cross_product(Vector<T> &u, Vector<T> &v) {
+ft::Vector<T>   cross_product(ft::Vector<T> &u, ft::Vector<T> &v) {
     return {
         u[1] * v[2] - u[2] * v[1],
         u[2] * v[0] - u[0] * v[2],

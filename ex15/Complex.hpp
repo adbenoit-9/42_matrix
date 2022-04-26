@@ -1,11 +1,9 @@
 #ifndef COMPLEX_HPP
 # define COMPLEX_HPP
 
-# include <iostream>
-# include "Vector.hpp"
 # include "Matrix.hpp"
-# include "functions.hpp"
 
+namespace ft{
 class Complex {
     public:
         typedef double value_type;
@@ -102,5 +100,6 @@ class Complex {
         value_type _r;
         value_type _im;
 };
+}
 
 #endif

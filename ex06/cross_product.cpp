@@ -2,7 +2,7 @@
 #include "../Matrix.hpp"
 
 template<typename T>
-Vector<T>   cross_product(Vector<T> &u, Vector<T> &v) {
+ft::Vector<T>   cross_product(ft::Vector<T> &u, ft::Vector<T> &v) {
     return {
         u[1] * v[2] - u[2] * v[1],
         u[2] * v[0] - u[0] * v[2],
@@ -11,8 +11,8 @@ Vector<T>   cross_product(Vector<T> &u, Vector<T> &v) {
 }
 
 int main() {
-    Vector<double> u = {0., 0., 1.};
-    Vector<double> v = {1., 0., 0.};
+    ft::Vector<double> u = {0., 0., 1.};
+    ft::Vector<double> v = {1., 0., 0.};
     std::cout   << "cross_product({0., 0., 1.}, {1., 0., 0.}) =\n"
                 << cross_product<double>(u, v) << std::endl
                 << std::endl;

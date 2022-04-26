@@ -2,7 +2,7 @@
 #include "../Matrix.hpp"
 
 int main() {
-    Matrix<double> u = {
+    ft::Matrix<double> u = {
         {1., 0., 0.},
         {0., 1., 0.},
         {1., 0., 1.}

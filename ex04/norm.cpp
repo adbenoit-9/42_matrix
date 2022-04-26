@@ -2,7 +2,7 @@
 #include "../Matrix.hpp"
 
 int main() {
-    Vector<double>   u = {0., 0., 0.};
+    ft::Vector<double>   u = {0., 0., 0.};
     std::cout   << "{0., 0., 0.}" << std::endl
                 << "norm_1 = " << u.norm_1() << std::endl
                 << "norm = " << u.norm() << std::endl

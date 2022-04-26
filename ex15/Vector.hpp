@@ -6,6 +6,7 @@
 # include <cmath>
 # include <initializer_list>
 
+namespace ft{
 template < class T = double>
 class Vector
 {
@@ -146,10 +147,11 @@ class Vector
 };
 
 template<typename T>
-std::ostream& operator << (std::ostream& os, const Vector<T> &vect) {
-    for (typename Vector<T>::size_type i = 0; i < vect.size(); i++)
+std::ostream& operator << (std::ostream& os, const ft::Vector<T> &vect) {
+    for (typename ft::Vector<T>::size_type i = 0; i < vect.size(); i++)
         os << "[" << std::setprecision(3) << vect[i] << "]" << std::endl;
     return os;
+}
 }
 
 #endif

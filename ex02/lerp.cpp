@@ -10,23 +10,23 @@ T lerp(T u, T v, double t) {
 }
 
 int main() {
-    Vector<double> res = lerp< Vector<double> >({0.}, {1.}, 0.);
+    ft::Vector<double> res = lerp< ft::Vector<double> >({0.}, {1.}, 0.);
     std::cout   << "lerp(0., 1., 0.) = \n" << res << std::endl;
-    res = lerp< Vector<double> >({0.}, {1.}, 1.);
+    res = lerp< ft::Vector<double> >({0.}, {1.}, 1.);
     std::cout   << "lerp(0., 1., 1.) = \n" << res << std::endl;
-    res = lerp< Vector<double> >({0.}, {1.}, 0.5);
+    res = lerp< ft::Vector<double> >({0.}, {1.}, 0.5);
     std::cout   << "lerp(0., 1., 0.5) = \n" << res << std::endl;
-    res = lerp< Vector<double> >({21.}, {42.}, 0.3);
+    res = lerp< ft::Vector<double> >({21.}, {42.}, 0.3);
     std::cout   << "lerp(21., 42., 0.3) = \n" << res << std::endl;
-    res = lerp< Vector<double> >(
+    res = lerp< ft::Vector<double> >(
             {2., 1.},
             {4., 2.},
             0.3
         );
     std::cout   << "lerp([2., 1.], [4., 2.], 0.3) =\n"
                 << res << std::endl;
-    Matrix<double> res1;
-    res1 = lerp< Matrix<double> >(
+    ft::Matrix<double> res1;
+    res1 = lerp< ft::Matrix<double> >(
             {{2., 1.}, {3., 4.}},
             {{20., 10.}, {30., 40.}},
             0.5

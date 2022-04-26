@@ -1,12 +1,11 @@
-#include "../Vector.hpp"
 #include "../Matrix.hpp"
 
 void    test_vector(void) {
     std::cout << "------ VECTOR ------" << std::endl;
-    Vector<double> u = {2., 3.};
+    ft::Vector<double> u = {2., 3.};
     std::cout << "u = " << std::endl << u << std::endl;
 
-    Vector<double> v = {5., 7.};
+    ft::Vector<double> v = {5., 7.};
     std::cout << "v = " << std::endl << v << "---\n" << std::endl;
 
     std::cout << "u.add(v) = \n";
@@ -28,10 +27,10 @@ void    test_vector(void) {
 
 void    test_matrix(void) {
     std::cout << "------ MATRIX ------" << std::endl;
-    Matrix<double> m1 = {{1., 2.}, {3., 4.}};
+    ft::Matrix<double> m1 = {{1., 2.}, {3., 4.}};
     std::cout << "m1 = " << std::endl << m1 << std::endl;
 
-    Matrix<double> m2 = {{7., 4.}, {-2., 2.}};
+    ft::Matrix<double> m2 = {{7., 4.}, {-2., 2.}};
     std::cout << "m2 = " << std::endl << m2 << "---\n" << std::endl;
     
     std::cout << "m1.add(m2) = \n";
