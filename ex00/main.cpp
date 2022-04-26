@@ -16,7 +16,7 @@ void    test_vector(void) {
     std::cout << "u.sub(v) = \n";
     u.sub(v);
     std::cout << u << std::endl;
-    v = {5., 7.};
+    u = {2., 3.};
 
     std::cout << "u.scl(2.) = \n";
     u.scl(2.);
