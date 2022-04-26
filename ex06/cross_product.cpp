@@ -3,6 +3,8 @@
 
 template<typename T>
 ft::Vector<T>   cross_product(ft::Vector<T> &u, ft::Vector<T> &v) {
+    if (u.size() != 3 || v.size() != 3)
+        throw typename ft::Vector<T>::sizeError();
     return {
         u[1] * v[2] - u[2] * v[1],
         u[2] * v[0] - u[0] * v[2],

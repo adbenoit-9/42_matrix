@@ -3,7 +3,10 @@
 
 template<typename T>
 T   angle_cos(ft::Vector<T> &u, ft::Vector<T> &v) {
-    return u.dot(v) / (u.norm() * v.norm());
+    double d = u.norm() * v.norm();
+    if (d == 0)
+        return 0;
+    return u.dot(v) / d;
 }
 
 int main() {

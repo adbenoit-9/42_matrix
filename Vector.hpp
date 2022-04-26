@@ -95,11 +95,15 @@ class Vector
         const_reference	operator[] (size_type n) const { return this->_begin[n]; }
 
         void            add(const Vector &x) {
+            if (this->_size != x._size)
+                throw sizeError();
             for (size_type i = 0; i < this->_size; i++)
                 this->_begin[i] += x[i];
         }
 
         void            sub(const Vector &x) {
+            if (this->_size != x._size)
+                throw sizeError();
             for (size_type i = 0; i < this->_size; i++)
                 this->_begin[i] -= x[i];
         }
@@ -110,6 +114,8 @@ class Vector
         }
 
         value_type      dot(Vector v) {
+            if (this->_size != v._size)
+                throw sizeError();
             value_type res = 0;
             for (size_type i = 0; i < this->_size; i++) {
                 res += this->_begin[i] * v[i];
@@ -141,6 +147,13 @@ class Vector
             }
             return max;
         }
+
+        class sizeError : virtual public std::exception {
+			public:
+				virtual const char*	what() const throw() {
+                    return "Size error";
+                };
+		};
         
     private:
         pointer			_begin;

@@ -4,8 +4,17 @@
 
 template<class V, typename K>
 V   linear_combination(std::vector<V> u, std::vector<K> coefs) {
-    V res(u[0].size(), 0);
-    for (size_t i = 0; i < u[0].size(); i++) {
+    if (u.size() != coefs.size())
+        throw typename V::sizeError();
+    if  (u.size() == 0)
+        return {};
+    size_t size = u[0].size();
+    for (size_t i = 1; i < u.size(); i++) {
+        if (u[i].size() != size)
+            throw typename V::sizeError();
+    }
+    V res(size, 0);
+    for (size_t i = 0; i < size; i++) {
         for (typename V::size_type j = 0; j < u.size(); j++)
             res[i] += u[j][i] * coefs[j];
     }
