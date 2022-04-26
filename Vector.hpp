@@ -5,6 +5,7 @@
 # include <iomanip>
 # include <cmath>
 # include <initializer_list>
+# include "utils.hpp"
 
 namespace ft{
 template < class T = double>
@@ -127,22 +128,20 @@ class Vector
             value_type n = 0;
             for (size_type i = 0; i < this->_size; i++) {
                 if (this->_begin[i] < 0)
-                    n -= this->_begin[i];
-                else
-                    n += this->_begin[i];
+                    n += ft::abs(this->_begin[i]);
             }
             return n;
         }
 
         value_type      norm(void) {
-            return pow(this->dot(*this), 0.5);
+            return std::pow(this->dot(*this), 0.5);
         }
 
         value_type      norm_inf(void) {
             value_type val;
-            value_type max = this->_begin[0] < 0 ? -this->_begin[0] : this->_begin[0];
+            value_type max = ft::abs(this->_begin[0]);
             for (size_type i = 1; i < this->_size; i++) {
-                val = this->_begin[i] < 0 ? -this->_begin[i] : this->_begin[i];
+                val = ft::abs(this->_begin[i]);
                 max = val > max ? val : max;
             }
             return max;

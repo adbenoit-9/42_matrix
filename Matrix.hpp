@@ -209,13 +209,13 @@ class Matrix
             return mat;
         }
 
-        void            substract_row(Matrix &mat, const vector &row, const size_type rank) {
-            if (row[rank] != 1)
+        void            substract_row(Matrix &mat, const vector &pivot, const size_type rank) {
+            if (pivot[rank] != 1)
                 return ;
             vector tmp;
             for (size_type i = 0; i < this->_row; i++) {
-                if (&mat[i] != &row && mat[i][rank] != 0) {
-                    tmp = row;
+                if (&mat[i] != &pivot && mat[i][rank] != 0) {
+                    tmp = pivot;
                     tmp.scl(mat[i][rank]);
                     mat[i].sub(tmp);
                 }
@@ -252,7 +252,7 @@ class Matrix
                     a = *this;
                     a.remove_row(i);
                     a.remove_col(0);
-                    det += this->_begin[i][0] * pow(-1, i) * a.determinant();
+                    det += this->_begin[i][0] * ft::pow(-1, i) * a.determinant();
                 }
             return det;
         }

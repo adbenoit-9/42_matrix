@@ -20,7 +20,7 @@ class Complex {
     }
 
     value_type  module(void) {
-        return pow(pow(this->_r, 2) + pow(this->_im, 2), 0.5);
+        return std::pow(ft::pow(this->_r, 2) + ft::pow(this->_im, 2), 0.5);
     }
 
     Complex&    operator=(const value_type& r) {

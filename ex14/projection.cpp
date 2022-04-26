@@ -1,11 +1,10 @@
-#include "../Vector.hpp"
 #include "../Matrix.hpp"
 
 ft::Matrix<double> projection(double fov, double ratio, double near, double far) {
     ft::Matrix<double> proj(4, 4, 0);
 
-    proj[0][0] = 1 / (ratio * tan(fov * 0.5));
-    proj[1][1] = 1 / tan(fov * 0.5);
+    proj[0][0] = 1 / (ratio * std::tan(fov * 0.5));
+    proj[1][1] = 1 / std::tan(fov * 0.5);
     proj[2][2] = -(far + near) / (far - near);
     proj[3][2] = -(2 * far * near) / (far - near);
     proj[2][3] = -1;
