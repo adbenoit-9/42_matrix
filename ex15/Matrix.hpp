@@ -2,9 +2,9 @@
 # define MATRIX_HPP
 
 # include "Vector.hpp"
+# include "../utils.hpp"
 # include <utility>
 # include <initializer_list>
-# include "../utils.hpp"
 
 namespace ft{
 template < class T = double>
@@ -166,7 +166,7 @@ class Matrix
         }
 
         Matrix          mul_mat(const Matrix &mat) {
-            if (this->_row != mat._column)
+            if (this->_column != mat._row)
                 throw sizeError();
             Matrix res(mat._column, mat._row, 0);
             for (size_type i = 0; i < this->_row; i++) {
@@ -194,6 +194,7 @@ class Matrix
             return tp;
         }
 
+    private:
         Matrix          &row_arrange(Matrix &mat) {
             Matrix tmp;
             for (size_type k = 0; k < this->_row && k < this->_column ; k++) {
@@ -210,7 +211,7 @@ class Matrix
             return mat;
         }
 
-        void            substract_row(Matrix &mat, const vector &pivot, const size_type rank) {
+        void            substract_pivot(Matrix &mat, const vector &pivot, const size_type rank) {
             if (pivot[rank] != 1)
                 return ;
             vector tmp;
@@ -223,6 +224,7 @@ class Matrix
             }
         }
 
+    public:
         Matrix          row_echelon(void) {
             if (this->_row <= 1)
                 return *this;
@@ -233,7 +235,7 @@ class Matrix
                 for (size_type j = k; j < this->_column; j++) {
                     if (res[k][j] != 0) {
                         res[k].scl(1 / res[k][j]);
-                        this->substract_row(res, res[k], j);
+                        this->substract_pivot(res, res[k], j);
                         break ;
                     }
                 }
