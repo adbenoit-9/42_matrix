@@ -280,7 +280,7 @@ class Matrix
         Matrix      inverse(void) {
             value_type det = this->determinant();
             if (det == 0)
-                return {};
+                throw singular();
             Matrix com = this->comatrix();
             Matrix tp = com.transpose();
             tp.scl(1 / det);
@@ -305,6 +305,13 @@ class Matrix
 			public:
 				virtual const char*	what() const throw() {
                     return "Size error";
+                };
+		};
+
+        class singular : virtual public std::exception {
+			public:
+				virtual const char*	what() const throw() {
+                    return "Singular matrix";
                 };
 		};
 
