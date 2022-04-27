@@ -5,6 +5,6 @@
 ```
 $ git clone git@github.com:adbenoit-9/42_matrix.git
 $ cd 42_matrix
-$ cd ex
+$ cd [exercice]
 $ sh run.sh
 ```
